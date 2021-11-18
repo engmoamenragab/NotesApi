@@ -1,4 +1,6 @@
-﻿using NotesApi.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using NotesApi.Context;
+using NotesApi.Interfaces;
 using NotesApi.Models;
 using System;
 using System.Collections.Generic;
@@ -9,34 +11,55 @@ namespace NotesApi.Repositories
 {
     public class NoteRepo : INoteRepo
     {
-        public IEnumerable<Note> GetAllUserNotes()
+        #region Fields
+        private readonly NotesApiDbContext db;
+        #endregion
+
+        #region Constructors
+        public NoteRepo(NotesApiDbContext db)
         {
-            throw new NotImplementedException();
+            this.db = db;
+        }
+        #endregion
+
+        #region Methods
+        public IEnumerable<Note> GetAllUserNotes(string userId)
+        {
+            var data = db.Notes.Where(N => N.UserId == userId);
+            return data;
         }
 
-        public Note GetNoteById(int Id)
+        public Note GetNoteById(Note model)
         {
-            throw new NotImplementedException();
+            var data = db.Notes.Where(N => N.Id == model.Id).FirstOrDefault();
+            return data;
         }
 
         public Note AddNote(Note model)
         {
-            throw new NotImplementedException();
+            db.Notes.Add(model);
+            db.SaveChanges();
+            return db.Notes.OrderBy(N => N.Id).LastOrDefault();
         }
 
         public Note UpdateNote(Note model)
         {
-            throw new NotImplementedException();
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return db.Notes.Where(E => E.Id == model.Id).FirstOrDefault();
         }
 
         public void DeleteNote(Note model)
         {
-            throw new NotImplementedException();
+            db.Notes.Remove(model);
+            db.SaveChanges();
         }
 
         public IEnumerable<Note> SearchByNoteTitle(string title)
         {
-            throw new NotImplementedException();
+            var data = db.Notes.Where(N => N.Title.Contains(title));
+            return data;
         }
+        #endregion
     }
 }

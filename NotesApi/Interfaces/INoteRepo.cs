@@ -8,8 +8,8 @@ namespace NotesApi.Interfaces
 {
     public interface INoteRepo
     {
-        IEnumerable<Note> GetAllUserNotes();
-        Note GetNoteById(int Id);
+        IEnumerable<Note> GetAllUserNotes(string userId);
+        Note GetNoteById(Note model);
         Note AddNote(Note model);
         Note UpdateNote(Note model);
         void DeleteNote(Note model);

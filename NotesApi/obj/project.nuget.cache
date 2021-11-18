@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PiZ6C0wdy5pTiaOBYH5xAWSH3C0Ms84K595DZTH7quP4cW1QxExmzsl3dipMrEJ2ng41BVBJ1gvndm63mC+dxA==",
+  "dgSpecHash": "tV0y0ehRqLlgqQQkvq/0dS/lnZqA6RUl4D/IMtZQQQti9QEharddrBXKkLIyuIPOHQ/1upVUTYxywGtddDtciw==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\asp-dotnet-core-apps\\NotesApi\\NotesApi\\NotesApi.csproj",
+  "projectFilePath": "D:\\GitHub\\asp-dotnet-core-apps\\NotesAPI\\NotesApi\\NotesApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\engmo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\engmo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

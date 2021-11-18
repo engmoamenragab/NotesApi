@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotesApi.Interfaces;
 using NotesApi.Models;
+using NotesApi.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,37 +27,117 @@ namespace NotesApi.Controllers
         #region Actions
         [HttpGet]
         [Route("~/api/Account/GetAllUserNotes")]
-        public IActionResult GetAllUserNotes(User user)
+        public IEnumerable<Note> GetAllUserNotes(string userId)
         {
-            return View();
+            var data = note.GetAllUserNotes(userId);
+            return data;
         }
 
         [HttpPost]
         [Route("~/api/Account/AddNote")]
-        public IActionResult AddNote(Note note)
+        public IActionResult AddNote(Note model)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var data = note.AddNote(model);
+                    return Ok(new Response()
+                    {
+                        Code = "200",
+                        Status = "Added",
+                        Message = "Note Added"
+                    });
+                }
+                else
+                {
+                    return BadRequest(new Response()
+                    {
+                        Code = "402",
+                        Status = "Bad Request",
+                        Message = "No Note Created"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new Response()
+                {
+                    Code = "402",
+                    Status = "Validation Error",
+                    Message = ex.Message
+                });
+            }
         }
 
         [HttpPost]
         [Route("~/api/Account/UpdateNote")]
-        public IActionResult UpdateNote(Note note)
+        public IActionResult UpdateNote(Note model)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var data = note.UpdateNote(model);
+                    return Ok(new Response()
+                    {
+                        Code = "200",
+                        Status = "Updated",
+                        Message = "Note Updated"
+                    });
+                }
+                else
+                {
+                    return BadRequest(new Response()
+                    {
+                        Code = "402",
+                        Status = "Bad Request",
+                        Message = "No Note Updated"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new Response()
+                {
+                    Code = "402",
+                    Status = "Validation Error",
+                    Message = ex.Message
+                });
+            }
         }
 
         [HttpPost]
         [Route("~/api/Account/DeleteNote")]
-        public IActionResult DeleteNote(Note note)
+        public IActionResult DeleteNote(Note model)
         {
-            return View();
+            try
+            {
+                note.DeleteNote(model);
+                return Ok(new Response()
+                {
+                    Code = "200",
+                    Status = "Deleted",
+                    Message = "Note Deleted"
+                });
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new Response()
+                {
+                    Code = "402",
+                    Status = "Bad Request",
+                    Message = ex.Message
+                });
+            }
         }
 
         [HttpPost]
         [Route("~/api/Account/SearchByNoteTitle")]
-        public IActionResult SearchByNoteTitle(string title)
+        public IEnumerable<Note> SearchByNoteTitle(string title)
         {
-            return View();
+            var data = note.SearchByNoteTitle(title);
+            return data;
         }
         #endregion
     }
