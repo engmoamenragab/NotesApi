@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NotesApi.Context;
 using NotesApi.Interfaces;
 using NotesApi.Models;
 using System;
@@ -16,13 +17,15 @@ namespace NotesApi.Controllers
         #region Fields
         private readonly ILogger<AccountController> logger;
         private readonly IUserRepo user;
+        private readonly NotesApiDbContext db;
         #endregion
 
         #region Constructors
-        public AccountController(ILogger<AccountController> logger, IUserRepo user)
+        public AccountController(ILogger<AccountController> logger, IUserRepo user, NotesApiDbContext db)
         {
             this.logger = logger;
             this.user = user;
+            this.db = db;
         }
         #endregion
 
@@ -31,22 +34,42 @@ namespace NotesApi.Controllers
         [Route("~/api/Account/Signup")]
         public async Task<IActionResult> Signup([FromBody] Signup newUser)
         {
-            var result = await user.Signup(newUser);
-            if(result.Succeeded)
+            var checkUser = new User()
             {
-                return Ok(new Response()
+                FirstName = newUser.FirstName,
+                LastName = newUser.LastName,
+                Email = newUser.Email,
+                Age = newUser.Age
+            };
+            var data = db.Users.Where(U => U.Email == checkUser.Email).FirstOrDefault();
+            if(data == null)
+            {
+                var result = await user.Signup(newUser);
+                if (result.Succeeded)
                 {
-                    Code = "200",
-                    Status = "Ok",
-                    Message = "User Registered"
+                    return Ok(new Response()
+                    {
+                        Code = "200",
+                        Status = "Ok",
+                        Message = "User Registered"
+                    });
+                }
+                return Unauthorized(new Response()
+                {
+                    Code = "401",
+                    Status = "Unauthorized",
+                    Message = "Unauthorized User"
                 });
             }
-            return Unauthorized(new Response()
+            else
             {
-                Code = "401",
-                Status = "Unauthorized",
-                Message = "Unauthorized User"
-            });
+                return Unauthorized(new Response()
+                {
+                    Code = "401",
+                    Status = "Unauthorized",
+                    Message = "Email Already Registered"
+                });
+            }
         }
 
         [HttpPost]

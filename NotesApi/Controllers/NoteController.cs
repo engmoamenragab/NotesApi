@@ -26,7 +26,7 @@ namespace NotesApi.Controllers
 
         #region Actions
         [HttpGet]
-        [Route("~/api/Account/GetAllUserNotes")]
+        [Route("~/api/Note/GetAllUserNotes")]
         public IEnumerable<Note> GetAllUserNotes(string userId)
         {
             var data = note.GetAllUserNotes(userId);
@@ -34,7 +34,7 @@ namespace NotesApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Account/AddNote")]
+        [Route("~/api/Note/AddNote")]
         public IActionResult AddNote(Note model)
         {
             try
@@ -71,7 +71,7 @@ namespace NotesApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Account/UpdateNote")]
+        [Route("~/api/Note/UpdateNote")]
         public IActionResult UpdateNote(Note model)
         {
             try
@@ -108,7 +108,7 @@ namespace NotesApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Account/DeleteNote")]
+        [Route("~/api/Note/DeleteNote")]
         public IActionResult DeleteNote(Note model)
         {
             try
@@ -133,7 +133,7 @@ namespace NotesApi.Controllers
         }
 
         [HttpPost]
-        [Route("~/api/Account/SearchByNoteTitle")]
+        [Route("~/api/Note/SearchByNoteTitle")]
         public IEnumerable<Note> SearchByNoteTitle(string title)
         {
             var data = note.SearchByNoteTitle(title);

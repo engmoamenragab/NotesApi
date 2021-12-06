@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NotesApi.Context;
 using NotesApi.Interfaces;
 using NotesApi.Models;
 using System;
@@ -33,15 +34,15 @@ namespace NotesApi.Repositories
         #region Methods
         public async Task<IdentityResult> Signup(Signup model)
         {
-            var newUser = new User()
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                UserName = model.Email,
-                Age = model.Age,
-            };
-            return await userManager.CreateAsync(newUser, model.Password);
+                var newUser = new User()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    UserName = model.Email,
+                    Age = model.Age,
+                };
+                return await userManager.CreateAsync(newUser, model.Password);
         }
 
         public async Task<string> Signin(Signin model)
@@ -51,9 +52,13 @@ namespace NotesApi.Repositories
             {
                 return null;
             }
+            var user = await userManager.FindByEmailAsync(model.Email);
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, model.Email),
+                new Claim(JwtRegisteredClaimNames.Sid, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Name, user.FirstName),
+                new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var authSigninKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JWT:Secret"]));
