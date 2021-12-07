@@ -143,3 +143,4 @@ D:\GitHub\asp-dotnet-core-apps\NotesAPI\NotesApi\obj\Debug\net5.0\NotesApi.dll
 D:\GitHub\asp-dotnet-core-apps\NotesAPI\NotesApi\obj\Debug\net5.0\ref\NotesApi.dll
 D:\GitHub\asp-dotnet-core-apps\NotesAPI\NotesApi\obj\Debug\net5.0\NotesApi.pdb
 D:\GitHub\asp-dotnet-core-apps\NotesAPI\NotesApi\obj\Debug\net5.0\NotesApi.genruntimeconfig.cache
+D:\GitHub\asp-dotnet-core-apps\NotesAPI\NotesApi\obj\Debug\net5.0\NotesApi.csproj.AssemblyReference.cache
