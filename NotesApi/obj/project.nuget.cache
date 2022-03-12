@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tV0y0ehRqLlgqQQkvq/0dS/lnZqA6RUl4D/IMtZQQQti9QEharddrBXKkLIyuIPOHQ/1upVUTYxywGtddDtciw==",
+  "dgSpecHash": "esDsMZ+pehXF2PmMKc8ZLf8wnHGA66xXm1VBCpl3iKP2mDi4GsGQW2Lt4ZwltP0+kPhMQw/GHTAnpf/MTX+lQA==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\asp-dotnet-core-apps\\NotesAPI\\NotesApi\\NotesApi.csproj",
   "expectedPackageFiles": [
@@ -144,7 +144,8 @@
     "C:\\Users\\engmo\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\engmo\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\engmo\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\engmo\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\engmo\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\engmo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
   ],
   "logs": []
 }
